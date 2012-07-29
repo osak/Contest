@@ -1,0 +1,1 @@
+c[10000][51],v[2][50],p,f,s;main(i,j,k,q,t){for(scanf("%d",&t);t--;p=0)for(scanf("%d%*d%d ",&k,&q);q--;)if((i=0)||getchar()<49)while(i<=k?scanf("%d ",c[p]+i++):!++p);else{while(i<2*k&&scanf("%d ",v[i<k]+i++%k));for(s=0,i=-1;(f=0)||++i-p;f||(s+=c[i][j]))for(j=-1;++j<k;f+=(c[i][j]<v[1][j]||c[i][j]>v[0][j]));printf("%d\n",s);}}

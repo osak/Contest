@@ -1,0 +1,1 @@
+c[9999][9],v[18],p,T,K,Q,s,f;main(i,j){for(scanf("%d",&T);T--;p=0)for(scanf("%d%*d%d",&K,&Q);Q--;){scanf("%d",&i);if(s=--i){for(;i++<K;)scanf("%d",c[p]+i);++p;}else{for(;i<K*2;)scanf("%d",v+i++);for(i=-1;++i<p;s+=f?0:c[i][K])for(j=-1;++j<K&&!(f=c[i][j]<v[j]||c[i][j]>v[K+j]););printf("%d\n",s);}}}

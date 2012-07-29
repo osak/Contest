@@ -1,0 +1,1 @@
+main(i,j){char*s="main(i,j){char*s=qzzq;while(~scanf(q%dq,&j))for(i=j&1;i<144;i+=2)if(s[i]-122)putchar(s[i]-113?s[i]:34);else for(j=i&1;j<144;j+=2)putchar(s[j]);}";while(~scanf("%d",&j))for(i=j&1;i<144;i+=2)if(s[i]-122)putchar(s[i]-113?s[i]:34);else for(j=i&1;j<144;j+=2)putchar(s[j]);}

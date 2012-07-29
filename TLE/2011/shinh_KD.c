@@ -1,0 +1,1 @@
+u['(('][9];i,U;k;*p,*b;v;main(T,q){for(gets(u);--T||~scanf("%d%d%d",&k,&v,&T,U=0);){for(p=0;p<b+k+1+v*(k-1);p||(b=p=v?q:u+U++))scanf("%d",p?p++:&v);if(v){for(*p=i=v=0;i<U;v+=*p*!b[k])for(p=u+i++,b=q;*p<=b[k]&*p>=*b;b++)p++;printf("%d\n",v);}}}  

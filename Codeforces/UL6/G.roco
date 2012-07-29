@@ -1,0 +1,70 @@
+co input {
+    iin [[101]]
+    inc [101]
+    eq [102] [101] [100]
+    if [102]
+    ac
+
+}
+
+co swap {
+    set [200] [[102]]
+    set [[102]] [[103]]
+    set [[103]] [200]
+    ac
+}
+co inner {
+    /*
+    cout 105
+    cout 32
+    iout [102]
+    cout 10
+    */
+
+    add [103] [102] 1 /* cmp 102 and 103 */
+    gt [104] [[102]] [[103]]
+    if [104]
+    ca swap
+    inc [102]
+    add [104] [102] 1
+    lt [104] [104] [101]
+    sub [104] 1 [104]
+    if [104]
+    ac
+}
+
+co outer {
+    /*
+    cout 111
+    cout 32
+    iout [101]
+    cout 10
+    */
+
+    set [102] 0
+    ca inner
+    dec [101]
+    eq [102] [101] 0
+    if [102]
+    ac
+}
+
+co print {
+    iout [[101]]
+    cout 32
+    inc [101]
+    eq [102] [101] [100]
+    if [102]
+    ac
+}
+
+iin [100]
+set [101] 0
+ca input
+
+set [101] [100]
+gt [102] [101] 1
+if [102]
+ca outer
+set [101] 0
+yi print

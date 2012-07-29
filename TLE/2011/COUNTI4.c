@@ -1,0 +1,1 @@
+main(i,j){char*s="main(i,j){char*s=%c%s%1$c,t[999];sprintf(t,s,34,s);for(gets(j);~scanf(%1$c%%d%1$c,&i);){for(s=j=0;j<304;)t[j++]-t[i%304]||++s;printf(%1$c%%d%1$c,s);puts(%1$c%1$c);}}",t[999];sprintf(t,s,34,s);for(gets(j);~scanf("%d",&i);){for(s=j=0;j<304;)t[j++]-t[i%304]||++s;printf("%d",s);puts("");}}

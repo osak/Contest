@@ -1,0 +1,1 @@
+char s[10000];i,l,h;main(a,t){while(gets(t))strcat(s,t);while(i++<(l=strlen(s))/2)h=(h*256+s[l-i]-s[l/2-i])%1009;puts(h||l&1?"no":"yes");}

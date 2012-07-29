@@ -1,0 +1,1 @@
+char*s="char*s=qq,*p;main(i,j){for(gets(j);~scanf(q%dq,&i,j=0);printf(q%dq,i<161&&s[i]-113?j*2:8)&&puts(qq)){i%=322;i-=(i>169?161:i>7?8:0);for(p=s;*p;*p++==s[i]&&++j);}}",*p;main(i,j){for(gets(j);~scanf("%d",&i,j=0);printf("%d",i<161&&s[i]-113?j*2:8)&&puts("")){i%=322;i-=(i>169?161:i>7?8:0);for(p=s;*p;*p++==s[i]&&++j);}}

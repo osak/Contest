@@ -1,0 +1,1 @@
+main(i){return 10-i&&!putchar(i>1?i:10,main(getchar()));}

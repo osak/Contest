@@ -1,0 +1,40 @@
+co ordret {
+    div [1] [1] 2
+    ac
+}
+co ord {
+    gt [100] [1] [0]
+    if [100]
+    yi ordret
+    mul [1] [1] 2
+}
+co out1 {
+    cout 49
+    ac
+}
+co out0 {
+    cout 48
+    ac
+}
+co binout {
+    if [100]
+    yi out1
+    yi out0
+}
+co bin {
+    lt [100] [0] [1]
+    sub [101] 1 [100]
+    add [102] 48 [101]
+    cout [102]
+    if [101]
+    sub [0] [0] [1]
+    div [1] [1] 2
+    eq [100] [1] 0
+    if [100]
+    ac
+}
+
+iin [0]
+set [1] 1
+ca ord
+yi bin

@@ -1,0 +1,30 @@
+co yes {
+    cout 89
+    cout 69
+    cout 83
+    cout 10
+    ac
+}
+co no {
+    cout 78
+    cout 79
+    cout 10
+    ac
+}
+co ans {
+    if [200]
+    yi yes
+    yi no
+}
+
+cin [0]
+eq [100] [0] 10
+if [100]
+yi ans
+
+eq [100] [0] 72
+add [200] [200] [100]
+eq [100] [0] 81
+add [200] [200] [100]
+eq [100] [0] 57
+add [200] [200] [100]

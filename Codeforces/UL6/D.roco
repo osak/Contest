@@ -1,0 +1,22 @@
+co ast {
+    cout 42
+    dec [1]
+    eq [100] [1] 0
+    if [100]
+    ac
+}
+co loop {
+    set [1] [2]
+    ca ast
+    cout 10
+    inc [2]
+    eq [100] [2] [0]
+    if [100]
+    ac
+}
+
+iin [0]
+inc [0]
+set [2] 1
+ca loop
+ac

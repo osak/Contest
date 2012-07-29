@@ -1,0 +1,1 @@
+main(i){char*s="main(i){char*s=%c%s%1$c,t[999];sprintf(t,s,34,s);while(~scanf(%1$c%%d%1$c,&i))for(i&=1;i<213;i+=2)putchar(t[i]);}",t[999];sprintf(t,s,34,s);while(~scanf("%d",&i))for(i&=1;i<213;i+=2)putchar(t[i]);}
