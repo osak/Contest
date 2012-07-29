@@ -1,5 +1,2 @@
-*
-!*.cc
-!*.c
-!.gitignore
-!init.rb
+*.txt
+*~
