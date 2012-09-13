@@ -77,6 +77,7 @@ struct mod/*{{{*/
   int inv(int x) const { return tbl[x]; }
 };/*}}}*/
 
+// O(lg N)
 long long gcd(long long a, long long b)/*{{{*/
 {
   if (a < b) {
@@ -132,6 +133,7 @@ struct ratio/*{{{*/
 
 // ax = b を解く。解 x は b に入る。
 // N < M のときは 0 = 0 みたいな式を追加して N == M にする。
+// O(M^2 N)
 template <class T>
 bool gaussian_elimination(vector<vector<T> >& a, vector<T>& b, const mod& MOD)/*{{{*/
 {

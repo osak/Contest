@@ -179,6 +179,7 @@ struct polygon/*{{{*/
   }
 };/*}}}*/
 
+// O(N)
 vector<P> convex(const vector<P>& ps)/*{{{*/
 {
   // assert(sorted(ps.begin(), ps.end()))

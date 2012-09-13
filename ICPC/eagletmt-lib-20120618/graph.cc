@@ -3,6 +3,7 @@
 #include <limits>
 using namespace std;
 
+// O(E^2 V)
 template <typename T>
 T edmonds_karp(const vector<vector<T> >& capacity, int source, int sink)/*{{{*/
 {
@@ -73,6 +74,8 @@ T dinic_augment(const T capacity[M][M], int N, T flow[M][M], int level[M], bool 
   }
   return 0;
 }/*}}}*/
+
+// O(V^2 E)
 template <typename T>
 T dinic(const T capacity[M][M], int N, int source, int sink)/*{{{*/
 {
@@ -126,6 +129,7 @@ T dinic(const T capacity[M][M], int N, int source, int sink)/*{{{*/
 }/*}}}*/
 
 // 連結な無向グラフのすべての辺を通るような閉路で，コストの合計の最小値
+// O(N^2 2^N)
 template <class T>
 T chinese_postman(const vector<vector<pair<int,T> > >& g)/*{{{*/
 {
@@ -203,6 +207,8 @@ bool bm_augment(const vector<vector<int> >& g, int u, vector<int>& match_to, vec
   return false;
 } // }}}
 
+// O(V(V+E))
+// Ford Fulkersonの変形．
 int bipartite_matching(const vector<vector<int> >& g, int L, vector<pair<int,int> >& matching)  // {{{
 {
   const int N = g.size();
@@ -223,6 +229,7 @@ int bipartite_matching(const vector<vector<int> >& g, int L, vector<pair<int,int
 } // }}}
 
 // mininum cut
+// O(V^3)
 template <class T>
 T stoer_wagner(vector<vector<T> > g)/*{{{*/
 {
@@ -286,6 +293,8 @@ void scc_visit(const vector<vector<int> >& g, int v, vector<int>& scc_map, int& 
     ++scc_size;
   }
 }/*}}}*/
+
+// O(V+E)
 pair<vector<int>,int> strongly_connected_components(const vector<vector<int> >& g)/*{{{*/
 {
   const int N = g.size();
@@ -313,6 +322,10 @@ struct node/*{{{*/
   int cost;
   node(int i, int c, int d) : index(i), capacity(c), cost(d) {}
 };/*}}}*/
+
+// O(V^2 U C) where
+//  U = sum of capacity
+//  C = sum of cost
 pair<int,int> primal_dual(const vector<vector<node> >& g, int source, int sink)/*{{{*/
 {
   const int N = g.size();
@@ -388,6 +401,9 @@ void make_edge(vector<edge<Flow, Cost> > *g, int src, int dst, Flow c, Cost d)/*
   g[dst].push_back(edge<Flow, Cost>(src, 0, -d, i));
 }/*}}}*/
 
+// O(V^2 U C) where
+//  U = sum of capacity
+//  C = sum of cost
 template <class Flow, class Cost>
 pair<Flow, Cost>
 primal_dual(vector<edge<Flow, Cost> > *g, int N, int source, int sink, int max_flow)/*{{{*/
