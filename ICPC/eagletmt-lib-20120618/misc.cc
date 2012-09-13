@@ -1,3 +1,4 @@
+// vim:set fdm=marker:
 struct DisjointSet/*{{{*/
 {
   vector<int> parent;
@@ -145,3 +146,18 @@ struct SegmentTree/*{{{*/
     }
   }
 };/*}}}*/
+
+// honeycomb {{{
+/*
+ * 0:  a a a a a a a a
+ * 1:   b b b b b b b
+ * 2:  a a a a a a a a
+ * のように，左上(0,0)が出張っている場合の配列．
+ * 左上が引っ込んでいる場合はEvenとOddを逆にする．
+ */
+const int DR[6] = {0, -1, -1, 0, 1, 1};
+const int DC[2][6] = {
+    {-1, -1, 0, 1, 0, -1}, // Even
+    {-1, 0, 1, 1, 1, 0}, // Odd
+};
+// }}}
