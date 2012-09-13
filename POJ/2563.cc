@@ -1,11 +1,11 @@
 //Name: Demerit Points
 //Level: 2
-//Category: ƒVƒ~ƒ…ƒŒ[ƒVƒ‡ƒ“
+//Category: ã‚·ãƒŸãƒ¥ãƒ¬ãƒ¼ã‚·ãƒ§ãƒ³
 //Note:
 
 /*
- * ‹C‚ğ‚Â‚¯‚ÄƒVƒ~ƒ…ƒŒ[ƒVƒ‡ƒ“‚·‚é‚¾‚¯D
- * 2”N–ˆ‚Ìmerit point‚Ì•t—^‚ÍC”N‚ÌƒpƒŠƒeƒB‚ÅŠÇ—‚·‚é‚Æˆµ‚¢‚â‚·‚¢D
+ * æ°—ã‚’ã¤ã‘ã¦ã‚·ãƒŸãƒ¥ãƒ¬ãƒ¼ã‚·ãƒ§ãƒ³ã™ã‚‹ã ã‘ï¼
+ * 2å¹´æ¯ã®merit pointã®ä»˜ä¸ã¯ï¼Œå¹´ã®ãƒ‘ãƒªãƒ†ã‚£ã§ç®¡ç†ã™ã‚‹ã¨æ‰±ã„ã‚„ã™ã„ï¼
  */
 #include <iostream>
 #include <vector>
@@ -41,14 +41,14 @@ void sim(int year, int month, int day, int &point, int &parity) {
         output(year, month, day, point);
     }
     else if(point < 0) {
-        // demerit point‚Í2Œ¸‚ç‚·‚©C”¼•ª‚É‚·‚é(¬”‚Í0‚ÖŠÛ‚ß‚é)‚Ì‚Ç‚¿‚ç‚©‘å‚«‚¢‚Ù‚¤‚ğ‘I‚ÔD
+        // demerit pointã¯2æ¸›ã‚‰ã™ã‹ï¼ŒåŠåˆ†ã«ã™ã‚‹(å°æ•°ã¯0ã¸ä¸¸ã‚ã‚‹)ã®ã©ã¡ã‚‰ã‹å¤§ãã„ã»ã†ã‚’é¸ã¶ï¼
         int diff = max(2, (abs(point)+1)/2);
         point += diff;
 
-        // demerit point‚ª1‚Ì‚Æ‚«‚Í2Œ¸‚ç‚µ‚ÄƒI[ƒo[‚·‚é‚Ì‚ÅƒNƒŠƒbƒv‚·‚éD
+        // demerit pointãŒ1ã®ã¨ãã¯2æ¸›ã‚‰ã—ã¦ã‚ªãƒ¼ãƒãƒ¼ã™ã‚‹ã®ã§ã‚¯ãƒªãƒƒãƒ—ã™ã‚‹ï¼
         if(point > 0) point = 0;
 
-        // ƒ|ƒCƒ“ƒg‚ª0‚É‚È‚Á‚½‚çC‚±‚Ì“_‚©‚ç2”N‚²‚Æ‚Émerit point‚ª•t—^‚³‚ê‚éD
+        // ãƒã‚¤ãƒ³ãƒˆãŒ0ã«ãªã£ãŸã‚‰ï¼Œã“ã®æ™‚ç‚¹ã‹ã‚‰2å¹´ã”ã¨ã«merit pointãŒä»˜ä¸ã•ã‚Œã‚‹ï¼
         if(point == 0) parity = year%2;
         output(year, month, day, point);
     }
@@ -82,13 +82,13 @@ int main() {
             ++year;
         }
         if(point > 0) {
-            // merit point‚Ædemerit point‚ğ‚Å‚«‚éŒÀ‚è‘ŠE‚³‚¹‚éD
+            // merit pointã¨demerit pointã‚’ã§ãã‚‹é™ã‚Šç›¸æ®ºã•ã›ã‚‹ï¼
             int delta = min((demerit+1)/2, point);
             point -= delta;
             demerit -= delta*2;
         }
         if(demerit > 0) {
-            // ‚±‚±‚É—ˆ‚½‚çmerit point‚Í0‚É‚È‚Á‚Ä‚¢‚éD
+            // ã“ã“ã«æ¥ãŸã‚‰merit pointã¯0ã«ãªã£ã¦ã„ã‚‹ï¼
             point -= demerit;
         }
         year = y; month = m; day = d;

@@ -1,10 +1,10 @@
 //Name: The Umbrella Problem: 2054
 //Level: 2
-//Category: ƒVƒ~ƒ…ƒŒ[ƒVƒ‡ƒ“
+//Category: ã‚·ãƒŸãƒ¥ãƒ¬ãƒ¼ã‚·ãƒ§ãƒ³
 //Note:
 
 /*
- * BFS‚È‚èDP‚È‚è‚Å“K“–‚É‚â‚é‚¾‚¯D
+ * BFSãªã‚ŠDPãªã‚Šã§é©å½“ã«ã‚„ã‚‹ã ã‘ï¼
  */
 #include <iostream>
 #include <vector>

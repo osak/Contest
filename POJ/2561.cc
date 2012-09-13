@@ -1,11 +1,11 @@
 //Name: Language Cardinality
 //Level: 2
-//Category: ������,�T��
+//Category: 文字列,探索
 //Note:
 
 /*
- * multimap�ŕϊ�����������āC���o�̕�������L���b�V�����Ȃ���i�C�[�u�ɒT������D
- * 1000�𒴂�����ł��؂��Ă悢�̂ŁC�Ȃ�ׂ����ʂȒT�������Ȃ�(�V����������𐶐����₷������)���߂ɁCBFS�ł͂Ȃ�DFS�����Ă���D
+ * multimapで変換辞書を作って，既出の文字列をキャッシュしながらナイーブに探索する．
+ * 1000を超えたら打ち切ってよいので，なるべく無駄な探索をしない(新しい文字列を生成しやすくする)ために，BFSではなくDFSをしている．
  */
 #include <iostream>
 #include <vector>

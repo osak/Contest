@@ -1,10 +1,10 @@
 //Name: World's Worst Bus Schedule
 //Level: 2
-//Category: ”Šw
+//Category: æ•°å­¦
 //Note:
 
 /*
- * “’…‚Ü‚Å‚ÉƒoƒX‚ª‰½ü‚µ‚Ä‚¢‚æ‚¤‚ÆCÅŒã‚Ì1„‚¾‚¯‚ğŒ©‚ê‚Î‚æ‚¢D
+ * åˆ°ç€ã¾ã§ã«ãƒã‚¹ãŒä½•å‘¨ã—ã¦ã„ã‚ˆã†ã¨ï¼Œæœ€å¾Œã®1å·¡ã ã‘ã‚’è¦‹ã‚Œã°ã‚ˆã„ï¼
  */
 #include <iostream>
 #include <vector>
@@ -54,7 +54,7 @@ int main() {
                 for(vector<int>::const_iterator it = v.begin(); it != v.end(); ++it) {
                     rem -= *it;
                     if(rem <= 0) {
-                        // *it‚ªo‚Ä‚©‚ç‹A‚Á‚Ä‚­‚é‚Ü‚Å‚É“’…‚µ‚½D
+                        // *itãŒå‡ºã¦ã‹ã‚‰å¸°ã£ã¦ãã‚‹ã¾ã§ã«åˆ°ç€ã—ãŸï¼
                         ans = min(ans, -rem);
                         break;
                     }

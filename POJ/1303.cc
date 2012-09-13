@@ -1,10 +1,10 @@
 //Name: Byte Me!
 //Level: 1
-//Category: ƒVƒ~ƒ…ƒŒ[ƒVƒ‡ƒ“,‚â‚é‚¾‚¯
+//Category: ã‚·ãƒŸãƒ¥ãƒ¬ãƒ¼ã‚·ãƒ§ãƒ³,ã‚„ã‚‹ã ã‘
 //Note:
 
 /*
- * ‚â‚é‚¾‚¯D
+ * ã‚„ã‚‹ã ã‘ï¼
  */
 #include <iostream>
 #include <vector>
