@@ -1,15 +1,20 @@
 //Name: World Islands
-//Level:
-//Category:
+//Level: 3
+//Category: グラフ,Graph,最小全域木,MST
 //Note:
 
+/*
+ * 取り除く点を全て試しながらMSTを構築する．
+ * Kruskal法では，N-2本の辺を取っても単一の全域木にならないことに注意．
+ *
+ * オーダーは O(N^2 log N)．
+ */
 #include <iostream>
 #include <vector>
 #include <string>
 #include <algorithm>
 #include <cmath>
 #include <cstdio>
-#include <iomanip>
 
 using namespace std;
 
@@ -55,20 +60,21 @@ int main() {
             }
         }
         sort(edges.begin(), edges.end());
-        DisjointSet ds(N);
-        double cost = 0;
-        int cnt = 0;
-        for(int i = 0; i < (int)edges.size(); ++i) {
-            const double c = edges[i].first;
-            const int a = edges[i].second.first;
-            const int b = edges[i].second.second;
-            if(!ds.unite(a, b)) continue;
-            cost += c;
-            ++cnt;
-            if(cnt == N-2) break;
+        double ans = 1e50;
+        for(int exclude = 0; exclude < N; ++exclude) {
+            double cost = 0;
+            DisjointSet ds(N);
+            for(int i = 0; i < (int)edges.size(); ++i) {
+                const double c = edges[i].first;
+                const int a = edges[i].second.first;
+                const int b = edges[i].second.second;
+                if(a == exclude || b == exclude) continue;
+                if(!ds.unite(a, b)) continue;
+                cost += c;
+            }
+            ans = min(ans, cost);
         }
-        printf("%.2f\n", cost+0.005);
-        //cout << fixed << setprecision(2) << cost << endl;
+        printf("%.2f\n", ans);
     }
     return 0;
 }
