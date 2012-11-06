@@ -1,15 +1,15 @@
 //Name: Grid
 //Level: 2
-//Category: ���w,���I�v��@,DP
+//Category: 数学,動的計画法,DP
 //Note:
 
 /*
- * ���[�v���Ă���O���b�h�Ȃ̂ŁC�E�����邩�������邩�ŋ߂�����I��(�㉺�����l)�D
- * �I�񂾌��Combination�Ńp�^�[���������߂�΂悢�D
- * �E����s���Ă�������s���Ă����������̏ꍇ�͂ǂ�����ʂ��Ă��ǂ��̂Ńp�^�[������2�{�ɂȂ邪�C
- * ����0�̂Ƃ��͗�O�ƂȂ邱�Ƃɒ��ӁD
+ * ループしているグリッドなので，右から回るか左から回るかで近い方を選ぶ(上下も同様)．
+ * 選んだ後はCombinationでパターン数を求めればよい．
+ * 右から行っても左から行っても同じ距離の場合はどっちを通っても良いのでパターン数が2倍になるが，
+ * 距離0のときは例外となることに注意．
  *
- * �I�[�_�[�̓R���r�l�[�V�����̌v�Z�� O(R+C)�D
+ * オーダーはコンビネーションの計算で O(R+C)．
  */
 #include <iostream>
 #include <vector>

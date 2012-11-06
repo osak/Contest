@@ -1,12 +1,12 @@
 //Name: ID
 //Level: 2
-//Category: ���I�v��@,DP
+//Category: 動的計画法,DP
 //Note:
 
 /*
- * *�łȂ����͂��炩���߃`�F�b�N�T�����v�Z�ł���D
- * *�̌���2�{���邩�ǂ������o���Ă����擪���猈�߂Ă����ƁC�a��10�Ŋ������]��܂ł����Ӗ��������Ȃ�����
- * O(*�̐�) �� DP �ɂł���D
+ * *でない桁はあらかじめチェックサムが計算できる．
+ * *の桁は2倍するかどうかを覚えておき先頭から決めていくと，和は10で割った余りまでしか意味を持たないため
+ * O(*の数) の DP にできる．
  */
 #include <iostream>
 #include <vector>
