@@ -1,6 +1,6 @@
 //Name: Russian Dolls
 //Level: 4
-//Category: 動的計画法,DP,DAG,経路復元
+//Category: 動的計画法,DP,DAG,経路復元,Special Judge
 //Note:
 
 /*
@@ -44,8 +44,8 @@ struct Tag {
     Tag(int a, int b, int l) : ai(a), bi(b), al(l) {}
 
     bool operator <(const Tag &other) const {
-        if(ai < other.ai) return ai < other.ai;
-        if(bi < other.bi) return bi < other.bi;
+        if(ai != other.ai) return ai < other.ai;
+        if(bi != other.bi) return bi < other.bi;
         return al < other.al;
     }
     
