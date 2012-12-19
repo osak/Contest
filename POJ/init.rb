@@ -18,12 +18,15 @@ if not FileTest.exist?(filename)
 //Category:
 //Note:
 
+#define _GLIBCXX_DEBUG
 #include <iostream>
 #include <vector>
 #include <string>
 #include <algorithm>
 
 using namespace std;
+
+#define FOREACH(it,c) for(__typeof(c.begin()) it = c.begin(); it != c.end(); ++it)
 
 int main() {
     ios::sync_with_stdio(0);
