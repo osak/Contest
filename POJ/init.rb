@@ -18,7 +18,10 @@ if not FileTest.exist?(filename)
 //Category:
 //Note:
 
+#ifndef ONLINE_JUDGE
 #define _GLIBCXX_DEBUG
+#endif
+
 #include <iostream>
 #include <vector>
 #include <string>
