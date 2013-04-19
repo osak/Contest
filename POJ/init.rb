@@ -1,4 +1,4 @@
-#!/usr/bin/ruby
+#!/usr/bin/env ruby
 
 require 'nokogiri'
 require 'open-uri'
@@ -29,7 +29,7 @@ if not FileTest.exist?(filename)
 
 using namespace std;
 
-#define FOREACH(it,c) for(__typeof(c.begin()) it = c.begin(); it != c.end(); ++it)
+#define FOREACH(it,c) for(__typeof((c).begin()) it = (c).begin(); it != (c).end(); ++it)
 #define TIMES(i,n) for(int (i) = 0; (i) < (n); ++(i))
 
 int main() {
