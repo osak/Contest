@@ -30,6 +30,7 @@ if not FileTest.exist?(filename)
 using namespace std;
 
 #define FOREACH(it,c) for(__typeof(c.begin()) it = c.begin(); it != c.end(); ++it)
+#define TIMES(i,n) for(int (i) = 0; (i) < (n); ++(i))
 
 int main() {
     ios::sync_with_stdio(0);
