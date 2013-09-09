@@ -17,7 +17,10 @@ module GaloisField
 
   module GaloisNumberImpl
     def initialize(num)
-      @value = num.to_i % self.class::MODULO
+      unless num.is_a?(Integer)
+        raise TypeError.new("Galois numbers can be created only from integer value.")
+      end
+      @value = num % self.class::MODULO
     end
 
     def +(other)
@@ -33,7 +36,7 @@ module GaloisField
     end
 
     def /(other)
-      self.class.new((@value * other.inv) % self.class::MODULO)
+      self * other.inv
     end
 
     def inv
@@ -49,7 +52,7 @@ module GaloisField
         pow %= self.class::MODULO
         rem /= 2
       end
-      res
+      res.to_galois(self.class::MODULO)
     end
 
     def coerce(val)
