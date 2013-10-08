@@ -3,7 +3,7 @@
 //Category: DP,動的計画法
 //Note: Typical DP Contest C
 
-/*
+/**
  * 人iが第kラウンドに進出できる確率をDPする。
  *   dp[k][i] = ∑ dp[k-1][j] * win_prob(i, j)
  * ただし、jは第kラウンドで人iが対戦し得る相手である。

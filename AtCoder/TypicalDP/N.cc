@@ -3,7 +3,7 @@
 //Category: 木,Tree,動的計画法,DP
 //Note: Typical DP Contest N
 
-/*
+/**
  *   o
  *  /|\
  * a c b
