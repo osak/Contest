@@ -3,7 +3,7 @@
 //Category: DP,動的計画法
 //Note: Typical DP Contest L
 
-/*
+/**
  * 猫iが巻き込む猫のうち、左端のものをleft_iとすると
  *   left_0 ≦ left_1 ≦ …… ≦ left_{N-1}
  * が成立する。

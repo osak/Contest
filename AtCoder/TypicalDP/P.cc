@@ -3,7 +3,7 @@
 //Category: 木,Tree,動的計画法,DP
 //Note:
 
-/*
+/**
  * 適当な頂点を根としたrooted treeの上で考えてよい。
  *
  * 各頂点の状態は
