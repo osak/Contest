@@ -21,6 +21,7 @@ void fill(vector<vector<int> > &v, int r, int c) {
 }
 
 int main() {
+    cin.tie(0);
     ios::sync_with_stdio(0);
 
     while(true) {
