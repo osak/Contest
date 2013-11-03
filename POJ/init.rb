@@ -22,7 +22,7 @@ if not FileTest.exist?(filename)
 #define _GLIBCXX_DEBUG
 #endif
 
-#include <iostream>
+#include <cstdio>
 #include <vector>
 #include <string>
 #include <algorithm>
@@ -32,9 +32,12 @@ using namespace std;
 #define FOREACH(it,c) for(__typeof((c).begin()) it = (c).begin(); it != (c).end(); ++it)
 #define TIMES(i,n) for(int (i) = 0; (i) < (n); ++(i))
 
+bool solve() {
+}
+
 int main() {
-    ios::sync_with_stdio(0);
-    cin.tie(0);
+    while(solve()) ;
+    return 0;
 }
 TEMPLATE
   end
