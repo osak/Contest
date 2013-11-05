@@ -1,6 +1,6 @@
 //Name: Brookebond s'en va en guerre...
 //Level: 2
-//Category: 幾何,Geometry,3次元
+//Category: 幾何,Geometry,3次元,Special Judge
 //Note:
 
 /**
