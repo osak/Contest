@@ -1,3 +1,22 @@
+//Name: White Bird
+//Level: 4
+//Category: 幾何,Geometry
+//Note:
+
+/**
+ * 射出角度は、(X,Y)に直接ぶつけるか、障害物の上側頂点を通るものだけを考えればよい。
+ * （下側頂点をちょうど通るようなものは、更に下げても有効である）
+ *
+ * 目標地点Pが決まると、初速のx成分とy成分を分けて考えることで、
+ *   Px = Vx × t
+ *   Py = -4.9t^2 + Vy × t
+ *   Vx^2 + Vy^2 = V^2
+ * という連立方程式になり、これを解くことで2つの候補が出てくる。
+ * それぞれについて、Xより前で障害物と軌道が衝突せず、X地点で
+ * Yより上にいることを確認すればよい。
+ *
+ * オーダーはO(N^2)。
+ */
 #include <iostream>
 #include <vector>
 #include <complex>
@@ -6,106 +25,122 @@
 
 using namespace std;
 
-typedef complex<double> Vector;
+typedef complex<double> P;
+
+const double EPS = 1e-9;
+
+int cmp(double a, double b) {
+    const double diff = a-b;
+    if(fabs(diff) < EPS) return 0;
+    return diff < 0 ? -1 : 1;
+}
 
 struct Rect {
-    double l, t, r, b;
+    P lb, rt;
 
     Rect() {}
-    Rect(double l, double t, double r, double b) : l(l), t(t), r(r), b(b) {}
+    Rect(const P &lb, const P &rt) : lb(lb), rt(rt) {}
+
+    double top() const { return rt.imag(); }
+    double bottom() const { return lb.imag(); }
+    double left() const { return lb.real(); }
+    double right() const { return rt.real(); }
 };
 
-double V;
-
-bool inRange(double a, double x, double b) {
-    return a < x && x < b;
+double calc(double t, double vy) {
+    return -4.9*t*t + vy*t;
 }
 
-double calc_val(double x, double theta) {
-    return -4.9*pow(x, 2)/V/V/pow(cos(theta), 2) + tan(center)*x;
-}
-
-double search_center(double k, double l, double r) {
-    for(int i = 0; i < 30; ++i) {
-        double center = (l+r) / 2;
-        double val = -k * pow(cos(center), 3) / sin(center);
-        if(val < 1) r = center;
-        else l = center;
+bool shoot(double vx, double vy, const vector<Rect> &rects, double X, double Y) {
+    if(cmp(vx, 0) == 0) {
+        return cmp(Y, 0) == 0;
     }
+    // X地点でY上空にいられない
+    if(cmp(calc(X / vx, vy), Y) < 0) return false;
 
-    return (l+r) / 2;
-}
-
-double search_theta(double x, double y, double l, double r, bool lower) {
-    for(int i = 0; i < 30; ++i) {
-        double center = (l+r) / 2;
-        double val = calc_val(x, center);
-        if(lower) {
-            if(val < y) l = center;
-            else r = center;
+    const double top_t = vy / 9.8;
+    const double top_x = vx * top_t;
+    const double top_y = calc(top_t, vy);
+    for(const Rect &r : rects) {
+        const double y_left = calc(r.left()/vx, vy);
+        const double y_right = calc(r.right()/vx, vy);
+        // Crash into left wall
+        if(cmp(r.bottom(), y_left) < 0 && cmp(y_left, r.top()) < 0) return false;
+        // Crash into right wall
+        if(cmp(r.bottom(), y_right) < 0 && cmp(y_right, r.top()) < 0) return false;
+        // Crash into top wall
+        if(cmp(y_left, r.top()) >= 0) {
+            if(cmp(y_right, r.top()) < 0) return false;
         }
-        else {
-            if(val < y) r = center;
-            else l = center;
+        // Crash into bottom wall
+        if(cmp(y_left, r.bottom()) <= 0) {
+            if(cmp(y_right, r.bottom()) > 0) return false;
+        }
+        // Crash into bottom wall(2)
+        if(cmp(r.left(), top_x) < 0 && cmp(top_x, r.right()) < 0) {
+            if(cmp(y_left, r.bottom()) <= 0
+                && cmp(y_right, r.bottom()) <= 0
+                && cmp(top_y, r.bottom()) > 0) return false;
         }
     }
+    return true;
 
-    return (l+r) / 2;
 }
-
-bool check_hit(double theta, const Rect &r) {
-    //left side
-    double lval = calc_val(r.l, theta);
-    if(inRange(r.b, lval, r.t)) return true;
-
-    //right side
-    double rval = calc_val(r.r, theta);
-    if(inRange(r.b, rval, r.t)) return true;
-
-    //top side
-    double a = -4.9/V/V/pow(cos(theta), 2);
-    double b = tan(theta);
-    double c = -r.t
-    double d = b*b - 4*a*c;
-    if(d >= 0) {
-        double lt = (-b - sqrt(d))/2/a;
-        if(inRange(r.l, lt, r.r)) return true;
-        double rt = (-b + sqrt(d))/2/a;
-        if(inRange(r.l, rt, r.r)) return true;
+bool check(const P &aim, const vector<Rect> &rects, double V, double X, double Y) {
+    const double a = norm(aim);
+    const double b = 9.8*aim.imag()*aim.real()*aim.real() - V*V*aim.real()*aim.real();
+    const double c = 4.9*4.9*pow(aim.real(), 4);
+    const double D = b*b - 4*a*c;
+    //cout << D << endl;
+    if(D < 0) return false;
+    const double vx_1 = 4*a*c / (2*a*(-b-sqrt(D)));
+    if(vx_1 >= 0) {
+        const double vx = sqrt(vx_1);
+        const double vy = sqrt(V*V - vx_1);
+        if(shoot(vx, vy, rects, X, Y)) return true;
     }
-
-    //bottom side
-    c = -r.b;
-    d = b*b - 4*a*c;
-    if(d >= 0) {
-        double lb = (-b - sqrt(d))/2/a;
-        if(inRange(r.l, lb, r.r)) return true;
-        double rb = (-b + sqrt(d))/2/a;
-        if(inRange(r.l, rb, r.r)) return true;
+    const double vx_2 = (-b - sqrt(D)) / (2*a);
+    if(vx_2 >= 0) {
+        const double vx = sqrt(vx_2);
+        const double vy = sqrt(V*V - vx_2);
+        if(shoot(vx, vy, rects, X, Y)) return true;
     }
-
     return false;
 }
 
-int main() {
-    int N, X, Y;
-    cin >> N >> X >> Y;
+bool solve() {
+    int N, V, X, Y;
+    if(!(cin >> N >> V >> X >> Y)) return false;
 
     vector<Rect> rects;
     for(int i = 0; i < N; ++i) {
-        Rect r;
-        cin >> r.l >> r.b >> r.r >> r.t;
-        rects.push_back(r);
+        double l, b, r, t;
+        cin >> l >> b >> r >> t;
+        if(l > X) continue;
+        if(r > X) r = X;
+        rects.push_back(Rect(P(l, b), P(r, t)));
+    }
+    if(check(P(X, Y), rects, V, X, Y)) {
+        cout << "Yes" << endl;
+        return true;
     }
 
-    bool ok = true;
-    for(int i = 0; i < N; ++i) {
-        const Rect &r = rects[i];
-        const Vector target(r.l, r.t);
-        const double k = -9.8 * target.real() * / V / V;
-        const double center = search_center(k, 0, M_PI/2);
+    for(const Rect &r : rects) {
+        if(check(P(r.left(), r.top()), rects, V, X, Y)
+            || check(r.rt, rects, V, X, Y))
+        {
+            cout << "Yes" << endl;
+            return true;
+        }
     }
+    cout << "No" << endl;
+    return true;
+}
 
-    cout << (ok ? "Yes" : "No") << endl;
+int main() {
+    cin.tie(0);
+    ios::sync_with_stdio(0);
+
+    while(solve()) ;
     return 0;
 }
