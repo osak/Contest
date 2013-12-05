@@ -1,85 +1,108 @@
-#include <iostream>
-#include <string>
+//Name: Board Silly
+//Level: 1
+//Category: やるだけ,シミュレーション
+//Note:
+
+/**
+ * 全てのコマに対して、指定されたとおりに動きをシミュレーションし、可能かどうか判定する。
+ */
+#ifndef ONLINE_JUDGE
+#define _GLIBCXX_DEBUG
+#endif
+
+#include <cstdio>
 #include <vector>
-#include <sstream>
+#include <string>
 #include <algorithm>
 
 using namespace std;
 
-int orgR, orgC;
-char T;
-vector<string> field(8);
-vector<string> ans;
+#define FOREACH(it,c) for(__typeof((c).begin()) it = (c).begin(); it != (c).end(); ++it)
+#define TIMES(i,n) for(int (i) = 0; (i) < (n); ++(i))
 
-int sign(int n) {
-    if(n == 0) return 0;
-    return n<0 ? -1 : 1;
+inline string pos_code(int r, int c) {
+    char buf[3];
+    buf[0] =  "ABCDEFGH"[r];
+    buf[1] = "12345678"[c];
+    buf[2] = 0;
+    return string(buf);
 }
 
-void check(int dR, int dC) {
-    if(dR == 0 && dC == 0) return;
-    int dr = 0, dc = 0;
-    bool ok = true;
-    do {
-        dr += sign(dR);
-        dc += sign(dC);
-        int r = orgR + dr;
-        int c = orgC + dc;
-        if(0 <= r && r < 8 && 0 <= c && c < 8 && (field[r][c] == '.' || field[r][c] == T)) {}
-        else {
-            ok = false;
-            break;
-        }
-    } while(dr != dR || dc != dC);
-    if(ok && field[orgR+dR][orgC+dC] == '.') {
-        ostringstream os;
-        os << (char)('A'+orgR) << (orgC+1) << "-" << (char)('A'+orgR+dR) << (orgC+dC+1);
-        ans.push_back(os.str());
+int count_token(const vector<string> &field, int r, int c, int dr, int dc) {
+    int cnt = 0;
+    for(int i = 0; ; ++i) {
+        const int nr = r + dr*i;
+        const int nc = c + dc*i;
+        if(nr < 0 || nr >= 8 || nc < 0 || nc >= 8) break;
+        if(field[nr][nc] != '.') ++cnt;
     }
+    for(int i = -1; ; --i) {
+        const int nr = r + dr*i;
+        const int nc = c + dc*i;
+        if(nr < 0 || nr >= 8 || nc < 0 || nc >= 8) break;
+        if(field[nr][nc] != '.') ++cnt;
+    }
+    return cnt;
+}
+
+void check_move(const vector<string> &field, int r, int c, vector<string> &ans) {
+    const string from = pos_code(r, c);
+    for(int dr = -1; dr <= 1; ++dr) {
+        for(int dc = -1; dc <= 1; ++dc) {
+            if(dr == 0 && dc == 0) continue;
+            const int cnt = count_token(field, r, c, dr, dc);
+            const int nr = r + dr * cnt;
+            const int nc = c + dc * cnt;
+            if(nr < 0 || nr >= 8 || nc < 0 || nc >= 8) continue;
+            if(field[nr][nc] == field[r][c]) continue;
+            bool ok = true;
+            for(int i = 1; i < cnt; ++i) {
+                const int ri = r + dr*i;
+                const int ci = c + dc*i;
+                if(field[ri][ci] != '.' && field[ri][ci] != field[r][c]) {
+                    ok = false;
+                    break;
+                }
+            }
+            if(ok) {
+                const string to = pos_code(nr, nc);
+                ans.push_back(from + "-" + to);
+            }
+        }
+    }
+}
+
+bool solve() {
+    static bool first = true;
+    vector<string> field(8);
+    char buf[10];
+    TIMES(i, 8) {
+        if(scanf(" %s", buf) == EOF) return false;
+        field[i] = string(buf);
+    }
+    char target;
+    scanf(" %c", &target);
+
+    vector<string> ans;
+    for(int r = 0; r < 8; ++r) {
+        for(int c = 0; c < 8; ++c) {
+            if(field[r][c] == target) check_move(field, r, c, ans);
+        }
+    }
+    sort(ans.begin(), ans.end());
+    if(!first) puts("");
+    if(ans.size() == 0) {
+        puts("No moves are possible");
+    } else {
+        TIMES(i, ans.size()) {
+            puts(ans[i].c_str());
+        }
+    }
+    first = false;
+    return true;
 }
 
 int main() {
-    while(cin >> field[0]) {
-        for(int i = 1; i < 8; ++i) cin >> field[i];
-        cin >> T;
-
-        ans.clear();
-        for(int R = 0; R < 8; ++R) {
-            for(int C = 0; C < 8; ++C) {
-                if(field[R][C] != T) continue;
-
-                //piece count on row
-                int pr = 0;
-                for(int c = 0; c < 8; ++c)
-                    if(field[R][c] != '.') ++pr;
-
-                //piece count on column
-                int pc = 0;
-                for(int r = 0; r < 8; ++r)
-                    if(field[r][C] != '.') ++pc;
-
-                //piece count on upright-downleft
-                int pur = 0;
-                for(int r = 0; r < 8; ++r) {
-                    int c = R+C-r;
-                    if(0 <= c && c < 8 && field[r][c] != '.') ++pur;
-                }
-
-                //piece count on upleft-downright
-                int pul = 0;
-                for(int r = 0; r < 8; ++r) {
-                    int c = C+r-R;
-                    if(0 <= c && c < 8 && field[r][c] != '.') ++pul;
-                }
-                orgR = R;
-                orgC = C;
-                check(R-pul, C-pul) ; check(R-pc, C) ; check(R-pur, C+pur) ;
-                check(R, C-pr)      ;                  check(R, C+pr)      ;
-                check(R+pur, C-pur) ; check(R+pc, C) ; check(R+pul, C+pul);
-            }
-        }
-        sort(ans.begin(), ans.end());
-        for(int i = 0; i < ans.size(); ++i) cout << ans[i] << endl;
-    }
+    while(solve()) ;
     return 0;
 }
