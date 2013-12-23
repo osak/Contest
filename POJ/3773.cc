@@ -1,23 +1,23 @@
 //Name: String-Matching Automata
 //Level: 4
-//Category: ������,�I�[�g�}�g��
+//Category: 文字列,オートマトン
 //Note:
 
 /*
- * �m�[�h N �̑J�ڂ͂������̃m�[�h�ɂ͈ˑ����Ȃ�����C�擪���珇�ɑJ�ڂ����߂Ă������Ƃ��ł���D
- * �܂��C����m�[�h�Ŏ��s�����Ƃ��ɖ߂�ꏊ�́C���̃m�[�h�܂ł̕������ suffix �̂����C
- * �󗝂�����������̐擪�ƃ}�b�`����C�ł����� suffix �̒����Ō��܂�D
- * �v����ɂ���͐擪�ȊO�̏ꏊ����m�[�h N �܂ő��������񂪉������ڂ܂Ŏ󗝂���Ă��邩�C�Ƃ������Ƃɓ������̂�
- * 1�����x��ŃI�[�g�}�g�������ǂ��Ă����|�C���^ shadow �����C�m�[�h N �Ŏ��s�����Ƃ��� shadow ����̑J�ڂ�
- * �g���悤�ɂ���΂悢�D
+ * ノード N の遷移はそれより後のノードには依存しないから，先頭から順に遷移を決めていくことができる．
+ * また，あるノードで失敗したときに戻る場所は，そのノードまでの文字列の suffix のうち，
+ * 受理したい文字列の先頭とマッチする，最も長い suffix の長さで決まる．
+ * 要するにこれは先頭以外の場所からノード N まで続く文字列が何文字目まで受理されているか，ということに等しいので
+ * 1文字遅れでオートマトンをたどっていくポインタ shadow を作り，ノード N で失敗したときは shadow からの遷移を
+ * 使うようにすればよい．
  *
- * Sample Input ���ɂ����
- * ababaca �ɑ΂��� shadow ��
- * babaca ���󗝂��悤�Ǝ��݂�D
- * ���̂Ƃ� shadow �ɕK�v�ȃm�[�h�͑S�đJ�ڂ��������Ă���C���� shadow �̂���m�[�h��
- * ababaca �ȊO�̕�������ő���󗝂����Ƃ��̃m�[�h�ɂȂ��Ă���D
+ * Sample Input を例にすると
+ * ababaca に対して shadow は
+ * babaca を受理しようと試みる．
+ * このとき shadow に必要なノードは全て遷移が完成しており，かつ shadow のいるノードは
+ * ababaca 以外の部分列を最大限受理したときのノードになっている．
  *
- * �I�[�_�[�� O(N)�D
+ * オーダーは O(N)．
  */ 
 #include <iostream>
 #include <vector>
