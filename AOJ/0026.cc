@@ -1,3 +1,12 @@
+//Name: Dropping Ink
+//Level: 1
+//Category: やるだけ
+//Note:
+
+/**
+ * 問題文の通りに塗りつぶすだけ。
+ * マンハッタン距離を利用すると、サイズ1とサイズ3が処理しやすくなる。
+ */
 #include <iostream>
 #include <vector>
 #include <algorithm>
