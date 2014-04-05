@@ -1,3 +1,15 @@
+//Name: Rose Garden Witch
+//Level: 3
+//Category: 幾何
+//Note:
+
+/**
+ * 走査線を0度から徐々に正の向きに回転させていく。
+ * このとき、図形の角が必ず直角であることから、角の向き4通りについて、分割数が増えるか減るかが決定できる。
+ * このような角を角度順にソートし、イベントドリブンで分割数を求めれば良い。
+ *
+ * オーダーはO(HW log HW)。
+ */
 #include <iostream>
 #include <complex>
 #include <cmath>
