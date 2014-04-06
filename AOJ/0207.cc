@@ -1,3 +1,14 @@
+//Name: Block
+//Level: 2
+//Category: グラフ,Graph,シミュレーション
+//Note:
+
+/**
+ * 盤面が小さいので、実際にブロックを置いた状態をシミュレーションして
+ * その上でスタートからゴールまでが連結であるかを調べればよい。
+ *
+ * オーダーは O(WH)。
+ */
 #include <iostream>
 #include <vector>
 
