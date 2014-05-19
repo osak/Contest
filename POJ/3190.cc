@@ -1,3 +1,15 @@
+//Name: Stall Reservations
+//Level: 2
+//Category: 貪欲,Greedy,Special Judge
+//Note:
+
+/**
+ * それぞれの牛の入る時刻と出る時刻を順に見ていく。
+ * 入るときは、開いている小屋があればそこに入れ、なければ小屋を追加する。
+ * 同じ時刻で複数のイベントが発生する場合、出る方を先に処理しないといけないことに注意。
+ *
+ * オーダーは O(N log N)。
+ */
 #include <iostream>
 #include <vector>
 #include <utility>
@@ -16,6 +28,10 @@ struct Tag {
     Tag(int c, int tt, bool i) : cow(c), t(tt), in(i) {}
 
     bool operator < (const Tag &other) const {
+        if(t == other.t) {
+            if(!in && other.in) return true;
+            return false;
+        }
         return t < other.t;
     }
 };
@@ -47,8 +63,7 @@ int main() {
                 q.pop();
             }
             //cout << t.cow << " -> " << barn[t.cow] << endl;
-        }
-        else {
+        } else {
             q.push(barn[t.cow]);
             //cout << t.cow << " <- " << barn[t.cow] << endl;
         }
