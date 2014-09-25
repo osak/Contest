@@ -19,12 +19,13 @@
 
 using namespace std;
 
-typedef bitset<20> State;
+typedef bitset<15> State;
 
 struct Rect {
     int r, c, h, w;
 
-    Rect() : r(0), c(0), h(0), w(0) {}
+    //Rect() : r(0), c(0), h(0), w(0) {}
+    Rect() {}
     Rect(int r, int c, int h, int w) : r(r), c(c), h(h), w(w) {}
 
     bool intersect(const Rect &other) const {
@@ -47,7 +48,7 @@ void dfs(int r, int c, State &state, vector<Rect> &cur) {
     } else {
         bool conquered = false;
         for(int i = 0; i < N; ++i) {
-            if(!state[i]) continue;
+            //if(!state[i]) continue;
             if(cur[i].intersect(Rect(r, c, 1, 1))) {
                 conquered = true;
                 break;
