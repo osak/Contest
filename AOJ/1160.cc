@@ -1,3 +1,14 @@
+//Name: How Many Islands?
+//Level: 2
+//Category: 塗りつぶし,幅優先探索,BFS
+//Note:
+
+/**
+ * 左上から順に走査していき、陸があったらつながっている陸地を全部塗りつぶしていく。
+ * 8方向の移動の時は、dxとdyに関して二重ループを書くのが楽。
+ *
+ * オーダーは O(WH)。
+ */
 #include <iostream>
 #include <vector>
 

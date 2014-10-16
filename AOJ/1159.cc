@@ -1,3 +1,13 @@
+//Name: Next Mayor
+//Level: 2
+//Category: シミュレーション
+//Note:
+
+/**
+ * 100万ステップ以内に終わることが分かっているので、素直にシミュレーションすればよい。
+ * オーダーは O(TN)。
+ * ただしTは終了までのターン数。
+ */
 #include <iostream>
 #include <vector>
 
