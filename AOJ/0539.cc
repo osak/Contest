@@ -1,3 +1,14 @@
+//Name: Pizza
+//Level: 3
+//Category: 二分探索,環状,練習問題
+//Note:
+
+/**
+ * 家kから一番近い店舗は、時計回りに見てkを超えない最大の位置にある店舗か、k以上で最小の位置にある店舗である。
+ * この両方をスタート地点として、時計回りと反時計回りの両方について距離を求め、最小値を採用すればよい。
+ *
+ * オーダーは O((M+N) log N)。
+ */
 #include <iostream>
 #include <vector>
 #include <algorithm>
