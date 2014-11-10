@@ -7,6 +7,9 @@
  * 先頭からi項目までを使ってsumを作る方法dp[i][sum]は，
  * i-1項目まででsum-terms[i]を作ってterms[i]を足すか，i-1項目まででsum+terms[i]を作ってterms[i]を引くかのどっちか．
  * この式でDPすればよい．
+ *
+ * オーダーは O(NS)。
+ * ただしSは計算途中で出現する数値の種類数で、S=20。
  */
 #include <iostream>
 #include <vector>

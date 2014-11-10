@@ -1,3 +1,11 @@
+//Name: Total Time
+//Level: 1
+//Category: やるだけ
+//Note:
+
+/**
+ * 秒数を全て足し、60で割った商と余りを出力する。
+ */
 #include <iostream>
 
 using namespace std;
