@@ -1,3 +1,14 @@
+//Name: Prime Path
+//Level: 3
+//Category: 数学,Math,素数,Prime number,グラフ,Graph,最短経路
+//Note:
+
+/**
+ * Acquire prime list by Eratosthenes' Sieve then make a graph by adding edges
+ * between primes whose hamming distance is exactly 1.
+ * 
+ * This algorithm runs in O(P^2 + P log P), where P is the number of 4-digits primes.
+ */
 #include <iostream>
 #include <vector>
 #include <queue>

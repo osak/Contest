@@ -1,3 +1,14 @@
+//Name: Prime Number
+//Level: 2
+//Category: 数学,Math,素数,Prime number,二分探索,Binary search
+//Note:
+
+/**
+ * エラトステネスの篩で素数リストを求めておくと、nの位置を二分探索することで答えが求められる。
+ *
+ * オーダーは O(M log M)。
+ * ただしMは必要な素数の最大値で、このオーダーはエラトステネスの篩のもの。
+ */
 #include <iostream>
 #include <vector>
 #include <algorithm>
