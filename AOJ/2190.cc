@@ -1,3 +1,13 @@
+//Name: Angel Stairs
+//Level: 3
+//Category: 動的計画法,DP
+//Note:
+
+/**
+ * 逆から見ていくと、地上に下りる直前にどこにいたかによって、それ以前の系列が1つに決まる。
+ *
+ * オーダーは O(M)。
+ */
 #include <iostream>
 #include <vector>
 #include <queue>
