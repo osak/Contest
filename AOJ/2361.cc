@@ -1,3 +1,14 @@
+//Name: Sort
+//Level: 2
+//Category: グラフ,Graph,最短経路
+//Note:
+
+/**
+ * pの状態を頂点として、iとjを入れ替えて到達できる頂点にコストc_{i,j}の辺を張る。
+ * ソート済み列を始点として、このグラフの上で最短経路を求めたとき、その最大値が答えとなる。
+ *
+ * オーダーは O(N^2 log N!) = O(N^3 log N)。
+ */
 #include <iostream>
 #include <vector>
 #include <queue>
