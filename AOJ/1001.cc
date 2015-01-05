@@ -1,3 +1,12 @@
+//Name: Binary Tree Intersection And Union
+//Level: 2
+//Category: 構文解析
+//Note:
+
+/**
+ * 構文解析して実際に木を作り、intersectionとunionをシミュレーションする。
+ * オーダーは O(|S|)。
+ */
 #include <iostream>
 #include <string>
 
