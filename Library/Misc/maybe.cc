@@ -17,14 +17,16 @@ struct Maybe {/*{{{*/
     }
 
     template<typename Cond>
-    void update(const T &v, Cond cond) {
+    bool update(const T &v, Cond cond) {
         if(!valid || cond(v, val)) {
             val = v;
             valid = true;
+            return true;
         }
+        return false;
     }
 
-    void update(const T &v) {
-        update(v, less<T>());
+    bool update(const T &v) {
+        return update(v, less<T>());
     }
 };/*}}}*/

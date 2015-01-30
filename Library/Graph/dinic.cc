@@ -2,7 +2,8 @@
 // This solves maximum flow problem efficiently.
 // Runs in O(V^2 E)
 // (In practice, this algorithm is faster than expected from theoretical analysis.)
-template<typename T, T INF>
+//
+/template<typename T, T INF, bool directed=true>
 struct Dinic {
     struct Edge {
         int to;
@@ -33,7 +34,6 @@ struct Dinic {
         }
     }
 
-private:
     T dinic_augment(int v, T cap) {
         if(v == sink_) return cap;
 
@@ -45,23 +45,23 @@ private:
             const T f = dinic_augment(e->to, min(cap, e->cap - e->flow));
             if(f > 0) {
                 e->add_flow(f);
+                memo_[v] = i+1;
                 return f;
             }
         }
         return 0;
     }
 
-public:
     void add_edge(int from, int to, T cap) {
         //cout << from << ' ' << to << endl;
         Edge *e = new Edge(to, cap, 0, nullptr);
-        Edge *r = new Edge(from, 0, 0, e);
+        Edge *r = new Edge(from, directed ? 0 : cap, 0, e);
         e->back = r;
         g_[from].push_back(e);
         g_[to].push_back(r);
     }
 
-    T dinic() {
+    T calc() {
         T flow = 0;
         while(true) {
             // Calculate depth of each vertex
@@ -94,6 +94,5 @@ public:
         return flow;
     }
 };
-
 // Used in:
-// AOJ2168
+// AOJ2168, SPOJ(FASTFLOW)
