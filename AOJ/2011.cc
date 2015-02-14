@@ -1,75 +1,72 @@
+//Name: Gather the Maps!
+//Level: 3
+//Category: グラフ,Graph,幅優先探索
+//Note: 
+
+/**
+ * まとめた地図を誰が持っているかは、あとで都合がいいように変えれば良い。
+ * ある子孫が持っている可能性のある地図集合は一意に定まる（もしも複数の可能性があるなら、
+ * マージして1つの地図にまとめられる）ので、要するに非決定性オートマトンをたどるのと同じことになる。
+ *
+ * オーダーは O(N log N)。
+ */
 #include <iostream>
 #include <vector>
+#include <bitset>
 
 using namespace std;
 
-//Verified PKU 2524
-int getroot(int i, vector<int> &roots) {
-    if(roots[i] == i) return i;
-    else return (roots[i] = getroot(roots[i], roots));
-}
+typedef bitset<50> State;
 
-//Verified PKU 2524
-bool unite(int i, int j, vector<int> &roots, vector<int> &levels) {
-    i = getroot(i, roots);
-    j = getroot(j, roots);
-    if(i == j) return false;
+bool solve(bool first) {
+    int N;
+    if(!(cin >> N)) return false;
+    if(!N) return false;
 
-    if(levels[i] < levels[j]) {
-        roots[i] = j;
+    vector<int> members[30];
+    vector<State> state(N);
+    for(int i = 0; i < N; ++i) {
+        int f;
+        cin >> f;
+        while(f--) {
+            int d;
+            cin >> d;
+            --d;
+            members[d].push_back(i);
+        }
+        state[i].set(i);
     }
-    else {
-        roots[j] = i;
-        if(levels[i] == levels[j]) ++levels[i];
+    int ans = -1;
+    if(N == 1) {
+        ans = 1;
+    } else {
+        for(int d = 0; d < 30; ++d) {
+            State s;
+            for(int i : members[d]) {
+                s |= state[i];
+            }
+            if(s.count() == N) {
+                ans = d+1;
+                break;
+            }
+            for(int i : members[d]) {
+                state[i] = s;
+            }
+        }
     }
+    cout << ans << endl;
     return true;
 }
 
-
 int main() {
-    while(true) {
-        int N;
-        cin >> N;
-        if(!N) break;
+    cin.tie(0);
+    ios::sync_with_stdio(0);
+    cout.setf(ios::fixed);
+    cout.precision(10);
 
-        vector<vector<int> > v(N, vector<int>(31, 0));
-        vector<int> roots(N);
-        vector<int> levels(N, 0);
-        for(int i = 0; i < N; ++i) {
-            int M;
-            cin >> M;
-            for(int j = 0; j < M; ++j) {
-                int n;
-                cin >> n;
-                v[i][n] = 1;
-            }
-            roots[i] = i;
-        }
-
-        int ans = -1;
-        for(int i = 1; i <= 30; ++i) {
-            int node = -1;
-            for(int n = 0; n < N; ++n) {
-                if(v[n][i]) {
-                    if(node == -1) node = n;
-                    else unite(node, n, roots, levels);
-                }
-            }
-
-            int root = getroot(0, roots);
-            bool ok = true;
-            for(int n = 1; n < N; ++n) {
-                if(root != getroot(n, roots)) {
-                    ok = false;
-                    break;
-                }
-            }
-            if(ok) {
-                ans = i;
-                break;
-            }
-        }
-        cout << ans << endl;
+    bool first = true;
+    while(solve(first)) {
+        first = false;
     }
     return 0;
 }
