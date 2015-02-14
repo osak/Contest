@@ -3,7 +3,7 @@
 // Runs in O(V^2 E)
 // (In practice, this algorithm is faster than expected from theoretical analysis.)
 //
-/template<typename T, T INF, bool directed=true>
+template<typename T, T INF, bool directed=true>
 struct Dinic {
     struct Edge {
         int to;
@@ -95,4 +95,4 @@ struct Dinic {
     }
 };
 // Used in:
-// AOJ2168, SPOJ(FASTFLOW)
+// AOJ2168, SPOJ(FASTFLOW), Codeforces 512C
