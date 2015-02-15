@@ -4,15 +4,24 @@ struct Maybe {/*{{{*/
     bool valid;
 
     Maybe() : valid(false) {}
-    Maybe(T &t) : val(t), valid(true) {}
-
-    T& operator =(const T &rv) {
-        val = rv;
-        valid = true;
-        return val;
+    Maybe(const T &t) : val(t), valid(true) {}
+    Maybe(const Maybe<T> &m) : valid(m.valid) {
+        if(valid) val = m.val;
     }
 
-    operator T() {
+    const T& operator =(const T &rv) {
+        val = rv;
+        valid = true;
+        return rv;
+    }
+
+    const Maybe<T>& operator =(const Maybe<T> &rv) {
+        if(rv.valid) val = rv.val;
+        valid = rv.valid;
+        return rv;
+    }
+
+    operator T() const {
         return valid ? val : T();
     }
 
