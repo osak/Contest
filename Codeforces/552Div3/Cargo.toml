@@ -1,0 +1,23 @@
+[package]
+name = "552Div3"
+version = "1.0.0"
+
+[[bin]]
+name = "A"
+path = "A.rs"
+
+[[bin]]
+name = "B"
+path = "B.rs"
+
+[[bin]]
+name = "C"
+path = "C.rs"
+
+[[bin]]
+name = "D"
+path = "D.rs"
+
+[[bin]]
+name = "E"
+path = "E.rs"
